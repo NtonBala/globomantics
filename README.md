@@ -12,7 +12,7 @@ Run `yarn install-deps` or `npm run install-deps` at the root of the project and
 
 ## Running the app
 
-Run `yarn start` at the root of the project.
+Run `yarn start` or `npm start` at the root of the project.
 
 The app is available at `/app`, the API at `/api`.
 
