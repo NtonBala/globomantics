@@ -1,7 +1,13 @@
 import React from 'react';
 
-// @ts-expect-error
-export const AuthContext = React.createContext();
+interface AuthContextValues {
+  authInfo: AuthInfo;
+  isAuthenticated: boolean;
+  setAuthInfo: (authInfo: AuthInfo) => void;
+  isAdmin: boolean;
+}
+
+export const AuthContext = React.createContext<undefined | AuthContextValues>(undefined);
 const Provider = AuthContext.Provider;
 
 interface Props {
@@ -21,9 +27,13 @@ export function AuthProvider({ children }: Props) {
     userData: null,
   });
 
-  const isAuthenticated = authInfo.userData;
+  const isAuthenticated = authInfo.userData !== null;
 
   const isAdmin = authInfo.userData?.role === 'ADMIN';
 
-  return <Provider value={{ authInfo, isAuthenticated, setAuthInfo, isAdmin }}>{children}</Provider>;
+  const handleAuthInfo = React.useCallback((authInfo: AuthInfo) => {
+    setAuthInfo(authInfo);
+  }, []);
+
+  return <Provider value={{ authInfo, isAuthenticated, setAuthInfo: handleAuthInfo, isAdmin }}>{children}</Provider>;
 }
