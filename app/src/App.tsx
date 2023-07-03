@@ -1,21 +1,22 @@
-import React from "react";
-import { Home } from "./pages/home/Home";
-import { Media } from "./pages/media/Media";
-import { OurStory } from "./pages/our-story/OurStory";
-import { Robotics } from "./pages/robotics/Robotics";
-import { Conference } from "./pages/conference/Conference";
-import { Auth } from "./pages/auth/Auth";
-import Admin from "./pages/admin/Admin";
+import React from 'react';
+import { Home } from './pages/home/Home';
+import { Media } from './pages/media/Media';
+import { OurStory } from './pages/our-story/OurStory';
+import { Robotics } from './pages/robotics/Robotics';
+import { Conference } from './pages/conference/Conference';
+import { Auth } from './pages/auth/Auth';
+import Admin from './pages/admin/Admin';
 
-import { Switch, Route, BrowserRouter as Router } from "react-router-dom";
-import { Header } from "./Header";
-import { Footer } from "./Footer";
-import { ApolloProvider } from "./context/ApolloProvider";
-import { AuthProvider } from "./context/AuthProvider";
-import { useAppInit } from "./useAppInit";
+import { Switch, Route, BrowserRouter as Router } from 'react-router-dom';
+import { Header } from './Header';
+import { Footer } from './Footer';
+import { ApolloProvider } from './context/ApolloProvider';
+import { AuthProvider } from './context/AuthProvider';
+import { useAppInit } from './useAppInit';
 
 function AppRouter() {
-  const { loading } = useAppInit();
+  const [loading] = useAppInit();
+
   return (
     <div id="wrapper">
       <Router>
