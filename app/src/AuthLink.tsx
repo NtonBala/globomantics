@@ -1,7 +1,7 @@
-import React, { useContext } from "react";
-import { Link, useHistory } from "react-router-dom";
-import { AuthContext } from "./context/AuthProvider";
-import { gql, useMutation } from "@apollo/client";
+import React from 'react';
+import { Link, useHistory } from 'react-router-dom';
+import { useAuthContext } from './context/AuthProvider';
+import { gql, useMutation } from '@apollo/client';
 
 const signOutMutation = gql`
   mutation signOutUser {
@@ -14,15 +14,15 @@ const signOutMutation = gql`
   }
 `;
 
-export const AuthLink = ({ children }) => {
+export const AuthLink = ({ children }: { children: React.ReactNode }) => {
   const [signOutUser] = useMutation(signOutMutation);
-  const { isAuthenticated, setAuthInfo } = useContext(AuthContext);
+  const { isAuthenticated, setAuthInfo } = useAuthContext();
   const history = useHistory();
 
   const handleSignOut = async () => {
     await signOutUser();
-    setAuthInfo({ userData: undefined });
-    history.push("/auth/sign-in");
+    setAuthInfo({ userData: null });
+    history.push('/auth/sign-in');
   };
 
   return isAuthenticated ? (

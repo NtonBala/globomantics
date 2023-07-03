@@ -37,3 +37,13 @@ export function AuthProvider({ children }: Props) {
 
   return <Provider value={{ authInfo, isAuthenticated, setAuthInfo: handleAuthInfo, isAdmin }}>{children}</Provider>;
 }
+
+export function useAuthContext() {
+  const context = React.useContext(AuthContext);
+
+  if (context === undefined) {
+    throw new Error('useAuthContext should be used within an AuthProvider.');
+  }
+
+  return context;
+}
