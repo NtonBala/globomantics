@@ -17,5 +17,3 @@ Run `yarn start` or `npm start` at the root of the project.
 The app is available at `/app`, the API at `/api`.
 
 Original app uses port `1337`.
-
-// Proceed from: 4. Working with APIs

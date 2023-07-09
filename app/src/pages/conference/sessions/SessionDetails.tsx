@@ -1,7 +1,7 @@
-import * as React from "react";
-import { useQuery, gql } from "@apollo/client";
-import { useParams } from "react-router-dom";
-import { SessionItem } from "./SessionItem";
+import * as React from 'react';
+import { useQuery, gql } from '@apollo/client';
+import { useParams } from 'react-router-dom';
+import { SessionItem } from './SessionItem';
 
 export const SESSION_BY_ID = gql`
   query sessionById($id: ID!) {
@@ -26,7 +26,7 @@ export const SESSION_BY_ID = gql`
 `;
 
 export function SessionDetails() {
-  const { session_id } = useParams();
+  const { session_id } = useParams<{ session_id: string }>();
   const { loading, error, data } = useQuery(SESSION_BY_ID, {
     variables: { id: session_id },
   });
@@ -36,13 +36,17 @@ export function SessionDetails() {
 
   const session = data.sessionById;
 
+  if (!session) {
+    return <div>No session found.</div>;
+  }
+
+  const favorites = data.user?.favorites ?? [];
+
   return (
     <SessionItem
       session={{
         ...session,
-        favorite: data.user?.favorites
-          .map(favorite => favorite.id)
-          .includes(session.id),
+        favorite: favorites.map((favorite: any) => favorite.id).includes(session.id),
       }}
     />
   );
