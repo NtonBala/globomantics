@@ -51,13 +51,21 @@ export function SessionItem({ session }) {
               </button>
             </span>
           )}
-          {speakers.map(({ id, full_name }) => (
-            <span key={id} style={{ padding: 2 }}>
-              <Link className="btn btn-default btn-lg" to={`/conference/speakers/${id}`}>
-                View {full_name}'s Profile
-              </Link>
-            </span>
-          ))}
+          {speakers ? (
+            speakers.map((speaker) => {
+              if (!speaker) return null;
+
+              return (
+                <span key={speaker.id} style={{ padding: 2 }}>
+                  <Link className="btn btn-default btn-lg" to={`/conference/speakers/${speaker.id}`}>
+                    View {speaker.full_name}'s Profile
+                  </Link>
+                </span>
+              );
+            })
+          ) : (
+            <div>No speakers found.</div>
+          )}
         </div>
       </div>
     </div>
